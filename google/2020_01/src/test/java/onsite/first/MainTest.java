@@ -1,28 +1,25 @@
 package onsite.first;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
+import java.util.Arrays;
+import java.util.List;
 import org.junit.Test;
-
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
 
 public class MainTest {
 
     @Test
-    public void test1() {
-        String input = "test input";
-        String expected = "answer";
+    public void lscommand() {
+        List<String> inputString = Arrays.asList(new String[]{"hoge", "hogehoge", "hogehogehogehog", "fugafuga", "fuga", "fugafuga", "fuga"});
+        int len = 35;
 
-        assertThat(execute(input + "\n"), is(expected + "\n"));
+        List<String> output = Main.ls(inputString, len);
+        output.stream().forEach(str -> System.out.println(str));
     }
 
-    private String execute(String input) {
-        ByteArrayOutputStream os = new ByteArrayOutputStream();
-        Main.solve(
-                new ByteArrayInputStream(input.getBytes()), new PrintStream(os)
-        );
-        return os.toString().replace(System.lineSeparator(), "\n");
+    @Test
+    public void subnetIpAddresses() {
+        String subnet = "192.168.10.8/28";
+
+        List<String> output = Main.subnetIp(subnet);
+        output.stream().forEach(str -> System.out.println(str));
     }
 }
